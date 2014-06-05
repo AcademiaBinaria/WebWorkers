@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <h1>Números primos</h1>
+    <div id="numerosPrimos"></div>
+    <script>
+        var worker = new Worker("primos.js");
+
+         // Registro directo
+        worker.onmessage = function (event) {
+            console.log("onmessage: " + event.data);
+            pintarPrimo(event.data);
+        }
+
+         // Suscripción a evento
+        worker.addEventListener('message', function (event) {
+            console.log("Listener_message: " + event.data);
+            pintarPrimo(event.data);
+        }, false);
+
+        var pintarPrimo = function (primo) {
+            var node = document.createElement("div");
+            var text = document.createTextNode(primo);
+            node.appendChild(text);
+            document.getElementById("numerosPrimos").appendChild(node);
+        }
+    </script>
+</body>
+
+</html>

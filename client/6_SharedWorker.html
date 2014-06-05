@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Shared Web Workers</title>
+</head>
+
+<body>
+    <h1>Shared Web Workers</h1>
+    <article>
+        En este caso usamos el objeto SharedWorker
+        <br/>var worker = new SharedWorker("jsworker.js");
+        <br/>Podemos mantener un contador actualizado entre distintas pestañas
+    </article>
+    <div id="result">
+        </div>
+
+        <script>
+            document.getElementById('result').textContent = "Inicio"
+            var worker = new SharedWorker('compartido.js');
+
+            worker.port.addEventListener("message", function (e) {
+                document.getElementById('result').textContent += " | " + e.data;
+            }, false);
+
+            worker.port.start();
+
+            worker.port.postMessage("desde la página 1");
+
+        </script>
+
+</body>
+
+</html>

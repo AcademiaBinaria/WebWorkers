@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Shared Web Workers BIS</title>
+</head>
+
+<body>
+    <h1>Shared Web Workers BIS</h1>
+    <article>
+        En este caso usamos el objeto SharedWorker
+        <br/>var worker = new SharedWorker("compartido.js");
+        <br/>Podemos mantener un contador actualizado entre distintas pestañas
+    </article>
+    <div id="result"></div>
+
+    <script>
+        var worker = new SharedWorker('compartido.js');
+        worker.port.start();
+        worker.port.postMessage("llamando desde otra página");
+        worker.port.addEventListener("message", function (e) {
+            document.getElementById('result').textContent += " | " + e.data;
+        }, false);
+    </script>
+</body>
+
+</html>

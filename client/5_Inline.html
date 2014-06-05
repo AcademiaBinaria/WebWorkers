@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</head>
+
+
+
+<body>
+    <h1>Inline worker </h1>
+
+    <article>
+        En este ejemplo el worker se creará 'on the fly' dentro del mismo fichero HTML.
+        <br/>Usando el interface Blob podemos agregarlo a partir de una cadena de texto
+    </article>
+
+    <div id="status"></div>
+
+    <script id="worker1" type="JavaScript/worker">
+        // Este código no se parsea porque está marcado con JavaScript/worker.
+        // El código es similara al del caso externo
+        self.onmessage = function (e) {
+            self.postMessage("<h3>Worker: Iniciamos cálculo de primos</h3><ul>");
+            var n = 1;
+            buscarPrimo: while (n < 500) {
+                n += 1;
+                for (var i = 2; i <= Math.sqrt(n); i += 1)
+                    if (n % i == 0)
+                        continue buscarPrimo;
+                    // encontrado!
+                postMessage("<li>Worker: Encontrado el primo: " + n + "</li>");
+            }
+            postMessage("</ul><h3>Worker: Finalizado el trabajo</h3>");
+        }
+    </script>
+
+    <script>
+         // Crear el worker a partir del texto mediante el BlobBuilder.
+        var blob = new Blob([document.querySelector('#worker1').textContent]);   
+         // creamos una URL desde la que 'servir' el fichero 'creado'
+        var objUrl = (window.webkitURL || window.URL);
+        var worker = new Worker(objUrl.createObjectURL(blob));
+         // Trabajamos con el worker igual que hasta ahora
+        worker.onmessage = function (e) {
+            $("#status").append(e.data);
+        }
+        worker.postMessage("A trabajar!"); 
+    </script>
+</body>
+
+</html>
