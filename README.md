@@ -52,10 +52,11 @@ WebWorkers
 - Pero tambien se pueden enviar objetos **JavaScript** directamente
 
 #### 4.1 Transferable objects
-`postMessage()` recibe strings, File, Blob, arrayBuffer pero creando una copia
+- `postMessage()` recibe strings, File, Blob, arrayBuffer pero creando una copia
    - =>lento y costoso en memoria
-Una mejora importante en ciertos navegadores modernos es `webKitPostMessage(arrayBuffer,[arrayBuffer])`
-En este caso se pasa **una referencia**
+- Una mejora importante en ciertos navegadores modernos es:
+   - `webKitPostMessage(arrayBuffer,[arrayBuffer])`
+- En este caso se pasa **una referencia**
 
 ---
 ---
