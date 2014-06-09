@@ -1,10 +1,12 @@
 WebWorkers
 ==========
 
+[EscuelaIT: Curso de Javascript avanzado y APIs HTML5](http://escuela.it/cursos/javascript-avanzado-apis-html5/)
+
 ---
 ---
 
-## 0. Qué son los Web-Workers y para qué son útiles
+## 0. Qué son los WebWorkers y para qué son útiles
 - Son **funciones** `JavaScript` 
 - Se ejecutan en un **thread** distinto al principal
 - No tienen acceso al DOM 
@@ -19,7 +21,6 @@ WebWorkers
 ## 1. Crear y comunicarse con webworkers dedicados
 - Creación
     - `var worker = new Worker("miTrabajador.js");`
-    - 
 - API
     - `onmessage` / `addEventListener`
     - `postMessage`
@@ -69,7 +70,7 @@ WebWorkers
 ---
 ---
 
-## 6. Shared worker
+## 6. Shared Worker
 - Instancia única compartida por varias aplicaciones (pestañas y ventanas)
 - Sus principal uso es en Transmisión de datos: 
    - cache, offline, syncro
