@@ -2,6 +2,7 @@ WebWorkers
 ==========
 
 ---
+---
 
 ## 0. Qué son los Web-Workers y para qué son útiles
 - Son **funciones** `JavaScript` 
@@ -13,6 +14,7 @@ WebWorkers
 - Puede ser dedicados o compartidos.
 
 ---
+---
 
 ## 1. Crear y comunicarse con webworkers dedicados
 - Creación
@@ -23,6 +25,7 @@ WebWorkers
     - `postMessage`
 
 ---
+---
 
 ## 2. Velocidad
 - Usar **sólo** cuando va a trabajar **mucho** en segundo plano
@@ -30,6 +33,7 @@ WebWorkers
 - Si hay mucho intercambio de mensajes también se ralentiza
 - Lo ideal es **un GRAN tabajo** que avise al acabaro en hitos importantes
 
+---
 ---
 
 ## 3. WebServices
@@ -39,7 +43,7 @@ WebWorkers
 - En este caso al teminar la descarga, 
 - Se llama a una función local para que haga algo costoso
 
-
+---
 ---
 
 ## 4. Pasando objetos
@@ -54,12 +58,14 @@ Una mejora importante en ciertos navegadores modernos es `webKitPostMessage(arra
 En este caso se pasa **una referencia**
 
 ---
+---
 
 ## 5. Inline Workers
 - Para reducir llamadas y evitar la precompilación
 - Se carga con el objeto `Blob` 
 - `window.webkitURL.createObjectURL(new Blob('texto del worker'))`
 
+---
 ---
 
 ## 6. Shared worker
@@ -68,6 +74,7 @@ En este caso se pasa **una referencia**
    - cache, offline, syncro
    - se aprovecha mejor la memoria y el coste de inicio
 
+---
 ---
 
 ## 7. Debug
@@ -78,6 +85,7 @@ En este caso se pasa **una referencia**
    - Chrome dev tools
 
 ---
+---
 
 ## 8. WebWorkers en NodeJS
 - NodeJS es conocido por su **ejecusión en bucle** dentro de un único thread
@@ -86,61 +94,9 @@ En este caso se pasa **una referencia**
 - El módulo que ofrece el API es `node-webworker`
 
 ---
-
-@albertoBasalo
-
----
-- API
-    - `onmessage` / `addEventListener`
-    - `postMessage`
-
----
-
-## 2. Velocidad
-- Usar **sólo** cuando va a trabajar **mucho** en segundo plano
-
----
-
-## 3. WebServices
-- `var url= url("http://midominio.com/?callback=mifuncionlocal")`
-- `importScripts(url);`
-
----
-
-## 4. Pasando objetos
-- Hasta ahora hemos enviado y recibido siempre cadenas
-- Pero tambien se pueden enviar objetos JSON 
-
-#### 4.1 Transferable objects
-`postMessage()` recibe strings, File, Blob, arrayBuffer pero copiandolo =>lento
-Una mejora importante en ciertos navegadores modernos es `webKitPostMessage(arrayBuffer,[arrayBuffer])`
-
----
-
-## 5. Inline Workers
-- Para reducir llamadas y evitar la precompilación
-- Se carga con el objeto `Blob` 
-- `window.webkitURL.createObjectURL(new Blob('texto del worker'))`
-
----
-
-## 6. Shared worker
-- Instancia única compartida por varias aplicaciones (pestañas y ventanas)
-- Transmision de datos: cache, offline, syncro
-
----
-
-## 7. Debug
-- `onerror` handler
-- Chrome dev tools
-
----
-
-## 8. WebWorkers en NodeJS
-- node-webworker
-
 ---
 
 @albertoBasalo
 
+---
 ---
