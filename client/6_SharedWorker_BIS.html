@@ -1,28 +1,27 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <title>Shared Web Workers BIS</title>
+<title>Shared Workers Test Page #2</title>
+<script type="text/javascript">
+  window.onload = function() {
+    console.log("Calling the worker from page 2");
+    parent.worker.port.addEventListener("message", function(e) {  
+      var data = e.data;
+      var result = document.getElementById("result");
+      if (data.PiValue) {
+        result.innerHTML += data.PiValue + '<br/>';
+      } else if (data.value) {
+        console.log('Page 2 received message: '+data.value);  
+      }
+    }, false);  
+    parent.worker.port.start();  
+  }
+</script>
 </head>
-
 <body>
-    <h1>Shared Web Workers BIS</h1>
-    <article>
-        En este caso usamos el objeto SharedWorker
-        <br/>var worker = new SharedWorker("compartido.js");
-        <br/>Podemos mantener un contador actualizado entre distintas pestañas
-    </article>
-    <div id="result"></div>
-
-    <script>
-        var worker = new SharedWorker('compartido.js');
-        worker.port.start();
-        worker.port.postMessage("llamando desde otra página");
-        worker.port.addEventListener("message", function (e) {
-            document.getElementById('result').textContent += " | " + e.data;
-        }, false);
-    </script>
+<h1>Shared Workers Test Page #2</h1>
+<article>
+  <div id="result"></div>
+</article>
 </body>
-
 </html>

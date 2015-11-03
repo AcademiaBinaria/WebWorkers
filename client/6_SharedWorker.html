@@ -1,35 +1,39 @@
-<!DOCTYPE HTML>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <title>Shared Web Workers</title>
-</head>
-
-<body>
-    <h1>Shared Web Workers</h1>
+    <title>Shared Workers Test Page #1</title>
+    <script>
+      var worker;
+			
+      function start() {
+        worker = new SharedWorker('compartido.js');
+        worker.port.addEventListener("message", function(e) {  
+          var data = e.data;
+          var result = document.getElementById("result");
+          if (data.FinalPiValue) {
+            result.innerHTML += data.FinalPiValue + ' (final)';
+          } else if (data.value) {
+    	      console.log('Page 1 received message: '+data.value);  
+          }
+        }, false);  
+        worker.port.start();  
+        // post a message to the shared web worker  
+        console.log("Calling the worker from page 1");
+        worker.port.postMessage({cmd: 'connect', id: "Page 1"});
+        //set the iframe page
+        document.getElementById("inner").src = '6_sharedworker_BIS.html';
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Shared Workers Test Page #1</h1>
     <article>
-        En este caso usamos el objeto SharedWorker
-        <br/>var worker = new SharedWorker("jsworker.js");
-        <br/>Podemos mantener un contador actualizado entre distintas pestañas
+      <input type="button" onclick="start()" value="Calculate Pi" />
+      <br/>
+      <br/>
+      <div id="result"></div>
+      <br/>
+      <iframe id="inner" style="width:600px; height:300px" src=""></iframe>
     </article>
-    <div id="result">
-        </div>
-
-        <script>
-            document.getElementById('result').textContent = "Inicio"
-            var worker = new SharedWorker('compartido.js');
-
-            worker.port.addEventListener("message", function (e) {
-                document.getElementById('result').textContent += " | " + e.data;
-            }, false);
-
-            worker.port.start();
-
-            worker.port.postMessage("desde la página 1");
-
-        </script>
-
-</body>
-
+  </body>
 </html>

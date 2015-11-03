@@ -10,7 +10,7 @@ WebWorkers
 - Son **funciones** `JavaScript` 
 - Se ejecutan en un **thread** distinto al principal
 - No tienen acceso al DOM 
-- Son costoso de instanciar
+- Son costosos de instanciar...
 - Pero muy eficientes una vez iniciados
 - El **API de comunicación** es muy sencilla
 - Puede ser dedicados o compartidos.
@@ -32,13 +32,13 @@ WebWorkers
 - Usar **sólo** cuando va a trabajar **mucho** en segundo plano
 - Las métricas para trabajos normales no suelen favorecer
 - Si hay mucho intercambio de mensajes también se ralentiza
-- Lo ideal es **un GRAN tabajo** que avise al acabaro en hitos importantes
+- Lo ideal es **un GRAN tabajo** que avise al acabar o en hitos importantes
 
 ---
 ---
 
 ## 3. WebServices
-- Uno de los usos más comunes es **procesar JSON**, local o proveniente de servicios web
+- Uno de los usos más comunes es **procesar JSON** local o proveniente de servicios web
     - `var url= url("http://midominio.com/?callback=miFuncionLocal")`
     - `importScripts(url);`
 - En este caso al teminar la descarga, 
@@ -49,7 +49,7 @@ WebWorkers
 
 ## 4. Pasando objetos
 - Hasta ahora hemos enviado y recibido siempre **cadenas**
-- Podemos **serializar y deserializar** cualquier objeto para comunicarlo
+- Podemos **serializar y deserializar** cualquier objeto para comunicarnos
 - Pero tambien se pueden enviar objetos **JavaScript** directamente
 
 #### 4.1 Transferable objects
@@ -63,7 +63,7 @@ WebWorkers
 ---
 
 ## 5. Inline Workers
-- Para reducir llamadas y evitar la precompilación
+- Se usa para reducir llamadas y evitar la precompilación
 - Se carga con el objeto `Blob` 
 - `window.webkitURL.createObjectURL(new Blob('texto del worker'))`
 
@@ -72,7 +72,7 @@ WebWorkers
 
 ## 6. Shared Worker
 - Instancia única compartida por varias aplicaciones (pestañas y ventanas)
-- Sus principal uso es en Transmisión de datos: 
+- Su principal uso es en Transmisión de datos: 
    - cache, offline, syncro
    - se aprovecha mejor la memoria y el coste de inicio
 

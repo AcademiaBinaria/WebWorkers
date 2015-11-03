@@ -1,53 +1,55 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <meta charset="utf-8" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 
 
 
 <body>
-    <h1>Inline worker </h1>
+  <h1>Inline worker </h1>
 
-    <article>
-        En este ejemplo el worker se creará 'on the fly' dentro del mismo fichero HTML.
-        <br/>Usando el interface Blob podemos agregarlo a partir de una cadena de texto
-    </article>
+  <article>
+    En este ejemplo el worker se creará 'on the fly' dentro del mismo fichero HTML.
+    <br/>Usando el interface Blob podemos agregarlo a partir de una cadena de texto
+  </article>
 
-    <div id="status"></div>
+  <div id="status"></div>
 
-    <script id="worker1" type="JavaScript/worker">
-        // Este código no se parsea porque está marcado con JavaScript/worker.
-        // El código es similara al del caso externo
-        self.onmessage = function (e) {
-            self.postMessage("<h3>Worker: Iniciamos cálculo de primos</h3><ul>");
-            var n = 1;
-            buscarPrimo: while (n < 500) {
-                n += 1;
-                for (var i = 2; i <= Math.sqrt(n); i += 1)
-                    if (n % i == 0)
-                        continue buscarPrimo;
-                    // encontrado!
-                postMessage("<li>Worker: Encontrado el primo: " + n + "</li>");
-            }
-            postMessage("</ul><h3>Worker: Finalizado el trabajo</h3>");
+  <script id="worker1" type="JavaScript/worker">
+    // Este código no se parsea porque está marcado con JavaScript/worker. // El código es similar al del caso externo 
+    (function () {
+      // Buscar número primos
+      postMessage('primosSTART');
+      var n = 1;
+      postMessage(n);
+      seguirBuscando: while (n < 100000) {
+        n += 1;
+        var max = Math.sqrt(n)
+        for (var i = 2; i <= max; i += 1) {
+          if (n % i == 0) {
+            continue seguirBuscando;
+          }
         }
-    </script>
+        postMessage(n);
+      }
+      postMessage('primosEND');
+    }())
+  </script>
 
-    <script>
-         // Crear el worker a partir del texto mediante el BlobBuilder.
+        <script>
+          // Crear el worker a partir del texto mediante el BlobBuilder.
         var blob = new Blob([document.querySelector('#worker1').textContent]);   
          // creamos una URL desde la que 'servir' el fichero 'creado'
-        var objUrl = (window.webkitURL || window.URL);
-        var worker = new Worker(objUrl.createObjectURL(blob));
+        var worker = new Worker(window.URL.createObjectURL(blob));
          // Trabajamos con el worker igual que hasta ahora
         worker.onmessage = function (e) {
             $("#status").append(e.data);
+            $("#status").append("<br>");
         }
-        worker.postMessage("A trabajar!"); 
-    </script>
+        worker.postMessage("A trabajar!");
+        </script>
 </body>
 
 </html>

@@ -2,51 +2,44 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
 </head>
 
 <body>
-    <h1>Números primos</h1>
-    <button onclick="arrancar()">Arrancar</button>
-    <button onclick="parar()">Parar</button>
-    <div id="numerosPrimos"></div>
-    
-    <script>
-        var worker;
+  <h1>Números primos</h1>
+  <button onclick="arrancar()">Arrancar</button>
+  <button onclick="parar()">Parar</button>
+  <div id="numerosPrimos"></div>
 
-        function arrancar() {
-            console.log('llamada para arrancar');
-            worker = new Worker("primosControlados.js");
-            // Suscripción a evento
-            worker.addEventListener('message', function (event) {
-                //console.log("Listener_message: " + event.data);
-                pintarPrimo(event.data);
-            }, false);
-            worker.postMessage({
-                'comando': 'iniciar',
-                'mayor': 1000000
-            });
+  <script>
+    var worker;
+    var numeros = document.getElementById("numerosPrimos");
+    function arrancar() {
+      worker = new Worker("primosControlados.js");
+      worker.addEventListener('message', pintarPrimo, false);
+      worker.postMessage({
+          'comando': 'iniciar',
+          'mayor': 1000000
+      });  
+    }
 
-            var pintarPrimo = function (primo) {
-                var node = document.createElement("div");
-                var text = document.createTextNode(primo);
-                node.appendChild(text);
-                document.getElementById("numerosPrimos").appendChild(node);
-            }
-        }
-
-        function parar() {
-            console.log('llamada para parar');
-            if (worker) {
-                worker.postMessage({
-                    'comando': 'parar',
-                    'mayor': 0
-                });
-                worker.terminate();
-                worker = null;
-            }
-        }
-    </script>
+    function pintarPrimo(primo) {
+        var node = document.createElement("div");
+        var text = document.createTextNode(primo.data);
+        node.appendChild(text);
+        numeros.appendChild(node);
+    }
+    function parar() {
+      if (worker) {
+        worker.postMessage({
+            'comando': 'parar',
+            'mayor': 0
+        });
+        worker.terminate();
+        worker = null;
+      }
+    }
+  </script>
 </body>
 
 </html>

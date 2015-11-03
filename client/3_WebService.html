@@ -12,7 +12,7 @@
         var worker = new Worker("webservices.js");
 
         worker.onmessage = function (event) {
-            console.log("onmessage: " + JSON.stringify(event.data));
+          document.write(event.data+ " <br>");
         }
          
     </script>

@@ -11,7 +11,6 @@
 				continue seguirBuscando;
 			}
 		}
-		postMessage(n);
 	}
 	postMessage('primosEND');
 }())
