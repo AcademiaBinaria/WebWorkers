@@ -1,0 +1,54 @@
+<html ng-app="webWorkers">
+
+<head>
+	<title>Web Workers</title>
+	<meta charset="utf-8" />
+	<meta lang="es" />
+	<meta name="description" content="" />
+	<meta name="author" content="Alberto Basalo @ Ágora Binaria" />
+	<meta name="application-name" content="WebWorkers" />
+	<meta name="Keywords" content="Web Workers, AngularJS, ejemplo, tutorial, curso, escuelaIT" />
+	<link rel="author" href="https://plus.google.com/+AlbertoBasalo71" />
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container-fluid" ng-controller="WebWorkerCtrl as vm">
+	<header>
+		<h1>Trabajos en segundo plano</h1>
+	</header>
+	<section>
+		<button ng-click="vm.agregarTarea()" class="btn btn-primary"> Más tareas !!! </button>
+		{{vm.tareas}}
+		<hr>
+		<div class="panel panel-info">
+			<div class="panel-heading">Totales</div>
+			<div class="panel-body">
+				{{vm.totales}}
+				</header>
+			</div>
+		</div>
+		<div class="panel panel-warning">
+			<div class="panel-heading">Pendientes</div>
+			<div class="panel-body">
+				{{vm.pendientes}}
+				</header>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">Terminadas</div>
+			<div class="panel-body">
+				{{vm.terminadas}}
+				</header>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<hr>
+		<p>Código de ejemplo creado por <a href="https://twitter.com/albertobasalo">Alberto Basalo</a> de <a href="http://agorabinaria.com">Ágora Binaria</a></p>
+		<p>Accede a este y otros contenidos formativos en <a href="https://github.com/AcademiaBinaria">GitHub-AcademiaBinaria</a></p>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>

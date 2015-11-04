@@ -14,6 +14,7 @@ WebWorkers
 - Pero muy eficientes una vez iniciados
 - El **API de comunicación** es muy sencilla
 - Puede ser dedicados o compartidos.
+- Están soportados en navegadores *modernos*, controlable via Modernizr
 
 ---
 ---
@@ -72,9 +73,6 @@ WebWorkers
 
 ## 6. Shared Worker
 - Instancia única compartida por varias aplicaciones (pestañas y ventanas)
-- Su principal uso es en Transmisión de datos: 
-   - cache, offline, syncro
-   - se aprovecha mejor la memoria y el coste de inicio
 
 ---
 ---
@@ -94,9 +92,21 @@ WebWorkers
 - Hay ocasiones en que ciertos procesos costosos **merecen un therad** aparte
 - En este csao usamos **la misma API cliente**
 - El módulo que ofrece el API es `node-webworker`
+- No confundir con las múltiples instancias generadas con **pm2**
 
 ---
 ---
+
+## 9. Usos
+- Procesos costosos en segundo plano
+   - criptografía
+   - proceso de imágenes
+   - manejo de grandes arrays
+   - Su principal uso es en Transmisión de datos: 
+      - colas offline/online
+      - cache, offline, syncro
+   - Siempre que se aproveche la memoria y el coste de inicio
+- En **AngularJS** permite la creación de [ng-webworker](https://github.com/mattslocum/ng-webworker)
 
 @albertoBasalo
 
