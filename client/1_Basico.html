@@ -8,23 +8,26 @@
 	<h1>Números primos y sus hermanos</h1>
 
 	<script>
-		var numeros = document.getElementById("numeros")
 		var milesWorker = new Worker("miles.js")
+
 		var primosWorker = new Worker("primos.js")
-		
+
 		// Registro directo
+		//primosWorker.onmessage = function(evento){console.log(evento);};
+
 		primosWorker.onmessage = alRecibirUnNumero
 
 		// Suscripción a evento
 		milesWorker.addEventListener('message', alRecibirUnNumero, true);
+		milesWorker.addEventListener('error', function (err) {
+			console.error(err)
+		}, true);
 
 		// callback para las suscripciones
 		function alRecibirUnNumero(evento) {
 			console.log("recibido: " + evento.data);
 			document.write(evento.data + " <br> ");
 		}
-
-
 	</script>
 </body>
 

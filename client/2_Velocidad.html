@@ -2,43 +2,43 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+	<meta charset="utf-8" />
 </head>
 
 <body>
-  <h1>Números primos</h1>
+	<h1>Números primos</h1>
 
-  <script>
-        var start = new Date();
-        console.log("start: " + (start));
-        var workerStarted = null;
-        //var worker = new Worker("primos.js");
-        var worker = new Worker("primosSpeed.js");
-        worker.onmessage = function (event) {
-          if(!workerStarted){
-            workerStarted = new Date()
-            console.log("start_WEB_WORKER: " + (workerStarted - start));
-          }
-          if (event.data == 'primosEND'){
-              console.log("lapse_WEB_WORKER: " + (new Date() - workerStarted));
-          }
-        }
-        
-        var onlineStarted = new Date();
-        console.log("start_ON_LINE: " + (onlineStarted - start));
-        var n=1;
-        seguirBuscando: while (n < 10000) {
-          n += 1;
-          var max = Math.sqrt(n)
-          for (var i = 2; i <= max; i += 1) {
-            if (n % i == 0) {
-               continue seguirBuscando;
-            }
-          }
-        }
+	<script>
+		var start = new Date();
+		console.log("start: " + (start));
+		var workerStarted = null;
+		//var worker = new Worker("primos.js");
+		var worker = new Worker("primosSpeed.js");
+		worker.onmessage = function (event) {
+			if (!workerStarted) {
+				workerStarted = new Date()
+				console.log("start_WEB_WORKER: " + (workerStarted - start));
+			}
+			if (event.data == 'primosEND') {
+				console.log("lapse_WEB_WORKER: " + (new Date() - workerStarted));
+			}
+		}
 
-        console.log("lapse_ON_LINE: " + (new Date() - onlineStarted));
-  </script>
+		var onlineStarted = new Date();
+		console.log("start_ON_LINE: " + (onlineStarted - start));
+		var n = 1;
+		seguirBuscando: while (n < 10000) {
+			n += 1;
+			var max = Math.sqrt(n)
+			for (var i = 2; i <= max; i += 1) {
+				if (n % i == 0) {
+					continue seguirBuscando;
+				}
+			}
+		}
+
+		console.log("lapse_ON_LINE: " + (new Date() - onlineStarted));
+	</script>
 </body>
 
 </html>

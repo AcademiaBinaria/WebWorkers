@@ -6,6 +6,11 @@ WebWorkers
 ---
 ---
 
+https://github.com/AcademiaBinaria/WebWorkers
+
+---
+---
+
 ## 0. Qué son los WebWorkers y para qué son útiles
 - Son **funciones** `JavaScript` 
 - Se ejecutan en un **thread** distinto al principal
@@ -33,7 +38,7 @@ WebWorkers
 - Usar **sólo** cuando va a trabajar **mucho** en segundo plano
 - Las métricas para trabajos normales no suelen favorecer
 - Si hay mucho intercambio de mensajes también se ralentiza
-- Lo ideal es **un GRAN tabajo** que avise al acabar o en hitos importantes
+- Lo ideal es **un GRAN trabajo** que avise al acabar o en hitos importantes
 
 ---
 ---
